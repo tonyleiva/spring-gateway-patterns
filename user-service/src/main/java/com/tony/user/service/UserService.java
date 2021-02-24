@@ -1,6 +1,7 @@
 package com.tony.user.service;
 
 import com.tony.user.entity.UserEntity;
+import com.tony.user.exception.UserNotFoundException;
 import com.tony.user.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,4 +24,7 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
+	public UserEntity getUserInfo(Integer userId) {
+		return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found"));
+	}
 }
